@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<div class="left">
+    <h1>Welcome back</h1>
+    <p>
+        Log in to reconnect with your hobbies and communities. Pick up where you left off and keep growing your passions.
+    </p>
+</div>
+
+<div class="right">
+    <h2>Log In</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {% if field.help_text %}
+                    <div class="helptext">{{ field.help_text }}</div>
+                {% endif %}
+                {{ field }}
+                {% for error in field.errors %}
+                    <div style="color:red; font-size: 0.9em;">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="switch-link">
+        Don't have an account? <a href="{% url 'register' %}">Register</a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+.create-group-page {
+    font-family: Arial, sans-serif;
+    background-color: #e9f3fb;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-wrapper {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #333;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+}
+
+.form-field input[type="text"],
+.form-field textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form-field textarea {
+    font-family: Arial, sans-serif;
+    resize: vertical;
+}
+
+.form-field textarea::placeholder {
+    font-family: Arial, sans-serif;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #3b78c3;
+}

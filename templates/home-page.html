@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="home-page">
+    <header>
+        <div class="middle-section">
+            <div class="search-container">
+                <input class="search-bar" type="text" placeholder="Search">
+            </div>
+        </div>
+        <div class="right-section">
+            <div>
+                Hey, {{ request.user.username }}
+            </div>
+        </div>
+    </header>
+
+    <main class="group-container">
+        <section class="user-groups-section">
+            <h1 class="section-title">Your Groups</h1>
+
+            {% if user_groups %}
+                <ul class="group-list">
+                    {% for group in user_groups %}
+                        <li class="group-item">
+                            <a href="{% url 'group-details' group.pk %}" class="group-link">
+                                <h2>{{ group.name }}</h2>
+                                <p>{{ group.description|truncatechars:100 }}</p>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="no-groups">You haven't joined any groups yet.</div>
+            {% endif %}
+        </section>
+
+        <section class="popular-groups-section">
+            <h1 class="section-title">Popular Groups</h1>
+
+            {% if popular_groups %}
+                <ul class="group-list">
+                    {% for group in popular_groups %}
+                        <li class="group-item">
+                            <a href="{% url 'group-details' group.pk %}" class="group-link">
+                                <h2>{{ group.name }}</h2>
+                                <p>{{ group.description }}</p>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="no-groups">No other groups found.</div>
+            {% endif %}
+        </section>
+    </main>
+
+    <a href="{% url 'create-group' %}" class="create-group-button">
+        Create Group
+    </a>
+
+</body>
+</html>

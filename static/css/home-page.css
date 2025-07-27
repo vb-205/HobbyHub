@@ -1,0 +1,127 @@
+.home-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #e9f3fb;
+    padding-top: 50px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #fff;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 3px solid rgb(221, 221, 221);
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+}
+.middle-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    display: flex;
+    max-width: 500px;
+    width: 100%;
+    height: 40px; /* taller height */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden; /* removes inner radius mismatch */
+    background-color: white;
+}
+
+.search-bar {
+    flex: 1;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.group-container {
+    padding: 32px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.group-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
+    justify-items: center;
+}
+
+.group-item {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 320px;
+    height: 100px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.group-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.group-item:hover {
+    transform: translateY(-5px);
+}
+
+.group-item h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.group-item p {
+    color: #555;
+    font-size: 14px;
+}
+
+.no-groups {
+    text-align: center;
+    font-size: 24px;
+    color: #777;
+    margin-top: 100px;
+}
+
+.create-group-button {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: #4a90e2;
+    color: white;
+    padding: 18px 28px;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.create-group-button:hover {
+    background-color: #3b78c3;
+}
