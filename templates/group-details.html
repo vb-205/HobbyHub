@@ -7,30 +7,64 @@
     <title>{{ group.name }}</title>
     <link rel="stylesheet" href="{% static 'css/group-details.css' %}">
 </head>
+
 <body class="group-details-page">
 
+    {% if messages %}
+      <div class="messages-container">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            <strong>{{ message.tags|title }}:</strong> {{ message }}
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
 
-    <div class="group-banner" style="background-image: url('{{ group.banner_url }}');"></div>
+    <div class="group-banner" style="background-image: url('{{ group.banner_url }}');">
+        {% for membership in group.groupmembership_set.all %}
 
+            {% if membership.user == user and membership.is_admin %}
+                <div class="admin-buttons">
+                    <a href="{% url 'edit-group' group.pk %}" class="edit-group-button">
+                        Edit Group</a>
+                    <a href="{% url 'delete-group' group.pk %}" class="delete-group-button">
+                        Delete Group</a>
+                </div>
+            {% endif %}
 
-<div class="group-header">
-    <div class="group-name-wrapper">
-        <h1 class="group-name">{{ group.name }}</h1>
-        <span class="member-count">{{ group.groupmembership_set.count }} members</span>
+        {% endfor %}
     </div>
 
-    <form method="post" action="{% url 'join-group' group.pk %}">
-        {% csrf_token %}
-        <button type="submit" class="join-button">
-            {% if user in group.members.all %}
-                Joined
-            {% else %}
-                Join
-            {% endif %}
-        </button>
-    </form>
-</div>
+    <div class="group-header">
+        <div class="group-name-wrapper">
+            <h1 class="group-name">{{ group.name }}</h1>
+            <span class="member-count">{{ group.groupmembership_set.count }} members</span>
+        </div>
 
+        <form method="post" action="{% url 'join-group' group.pk %}">
+            {% csrf_token %}
+            {% if user in group.members.all %}
+
+                <button type="submit" formaction="{% url 'leave-group' group.pk %}"
+                        class="leave-button"
+                        onclick="return confirm('Are you sure you want to leave the group?');">
+                    Leave Group
+                </button>
+
+            {% else %}
+
+                <button type="submit" class="join-button">
+                    Join
+                </button>
+
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="group-description">
+        <p>{{ group.description }}</p>
+    </div>
 
     <div class="group-content">
         <div class="left-content">

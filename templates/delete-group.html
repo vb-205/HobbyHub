@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Group</title>
+    <link rel="stylesheet" href="{% static 'css/delete-group.css' %}">
+</head>
+
+<body>
+
+    <div class="delete-container">
+        <p class="delete-message">
+            Are you sure you want to delete the group <strong>{{ object.name }}</strong>?
+        </p>
+
+        <div class="delete-buttons">
+            <a href="{% url 'group-details' object.pk %}" class="cancel-button">Cancel</a>
+
+            <form method="post" style="margin: 0;">
+                {% csrf_token %}
+                <button type="submit" class="delete-button">Delete</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

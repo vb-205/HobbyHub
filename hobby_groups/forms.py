@@ -22,3 +22,7 @@ class GroupBaseForm(forms.ModelForm):
 class CreateHobbyGroupForm(GroupBaseForm):
     class Meta(GroupBaseForm.Meta):
         ...
+
+class EditHobbyGroupForm(GroupBaseForm):
+    class Meta(GroupBaseForm.Meta):
+        ...

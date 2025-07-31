@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, DetailView
-from django.views.generic.edit import FormMixin
-from hobby_groups.forms import CreateHobbyGroupForm
+from django.views.generic.edit import FormMixin, UpdateView, DeleteView
+from hobby_groups.forms import CreateHobbyGroupForm, EditHobbyGroupForm
+from hobby_groups.mixins import GroupAdminRequiredMixin
 from hobby_groups.models import HobbyGroup, GroupMembership
 from posts.forms import CreatePostForm
 
@@ -65,3 +67,28 @@ class JoinGroupView(View):
             GroupMembership.objects.create(user=request.user, group=group)
 
         return redirect('group-details', pk=pk)
+
+class LeaveGroupView(View):
+    def post(self, request, pk):
+        group = get_object_or_404(HobbyGroup, pk=pk)
+        membership = GroupMembership.objects.get(user=request.user, group=group)
+
+        if membership.is_admin and group.groupmembership_set.filter(is_admin=True).count() == 1:
+            messages.error(request, "You are the only admin. You can't leave the group.")
+            return redirect('group-details', pk=pk)
+
+        membership.delete()
+        return redirect('home')
+
+class EditHobbyGroupView(GroupAdminRequiredMixin, UpdateView):
+    model = HobbyGroup
+    form_class = EditHobbyGroupForm
+    template_name = 'edit-group.html'
+
+    def get_success_url(self):
+        return reverse('group-details', kwargs={'pk': self.object.pk})
+
+class DeleteHobbyGroupView(GroupAdminRequiredMixin, DeleteView):
+    model = HobbyGroup
+    template_name = 'delete-group.html'
+    success_url = reverse_lazy('home')
