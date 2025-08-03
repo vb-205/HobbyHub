@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
     background-color: #e3f2fd;
@@ -94,6 +94,20 @@ input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
     -webkit-text-fill-color: #000 !important;
     border-radius: 8px;
+}
+
+.guest-link {
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.guest-link a {
+    color: #0d47a1;
+    text-decoration: none;
+}
+
+.guest-link a:hover {
+    text-decoration: underline;
 }
 
 

@@ -1,0 +1,168 @@
+.profile-page {
+    font-family: Arial, sans-serif;
+    background-color: #e9f3fb;
+}
+
+.profile-banner {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid white;
+    position: absolute;
+    bottom: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f0f0f0;
+    object-fit: cover;
+}
+
+.profile-container {
+    text-align: center;
+    margin-top: 100px; /* space for profile picture */
+    padding: 20px;
+}
+
+.profile-username {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.profile-bio {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.placeholder-bio {
+    color: #999;
+    font-style: italic;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.group-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
+    justify-items: center;
+}
+
+.group-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.group-item:hover {
+    transform: translateY(-2px);
+}
+
+.group-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.group-banner-preview {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid #eee;
+}
+
+.group-info {
+    padding: 16px;
+}
+
+.group-info h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.group-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.no-groups {
+    text-align: center;
+    font-size: 24px;
+    color: #777;
+    margin-top: 100px;
+}
+
+.edit-profile-section {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.section-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.edit-profile-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3f51b5;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.edit-profile-button:hover {
+    background-color: #303f9f;
+}
+
+.logout-section {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.logout-button {
+    padding: 12px 30px;
+    background-color: #dc3545;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}

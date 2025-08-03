@@ -24,6 +24,25 @@ header {
     display: flex;
     align-items: center;
 }
+
+.profile-button,
+.register-button{
+    margin-left: 12px;
+    padding: 8px 14px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-button:hover,
+.register-button:hover{
+    background-color: #3b78c3;
+}
+
 .middle-section {
     flex: 1;
     display: flex;
@@ -67,36 +86,44 @@ header {
 }
 
 .group-item {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    max-width: 320px;
-    height: 100px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.group-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
 }
 
 .group-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
 }
 
-.group-item h2 {
-    margin: 0 0 10px;
+.group-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.group-banner-preview {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid #eee;
+}
+
+.group-info {
+    padding: 16px;
+}
+
+.group-info h2 {
+    margin: 0 0 8px;
     font-size: 20px;
 }
 
-.group-item p {
-    color: #555;
+.group-info p {
+    margin: 0;
     font-size: 14px;
+    color: #555;
 }
 
 .no-groups {

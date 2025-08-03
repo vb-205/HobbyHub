@@ -34,16 +34,17 @@ class Profile(models.Model):
         primary_key=True,
     )
 
-    username = models.CharField(
-        max_length=30,
-    )
-
     bio = models.TextField(
         blank=True,
         null=True,
     )
 
-    location = models.CharField(
+    profile_picture = models.URLField(
+        blank=True,
+        null=True,
+    )
+
+    profile_banner = models.URLField(
         blank=True,
         null=True,
     )

@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{% static 'css/edit-profile.css' %}">
+</head>
+<body class="edit-profile-page">
+
+    <div class="container">
+        <h1>Edit Your Profile</h1>
+        <p class="description">Update your profile picture, banner, and bio so others can get to know you better.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.profile_picture.label_tag }}
+                {{ form.profile_picture }}
+                {{ form.profile_picture.errors }}
+            </div>
+
+            <div class="form-group">
+                {{ form.profile_banner.label_tag }}
+                {{ form.profile_banner }}
+                {{ form.profile_banner.errors }}
+            </div>
+
+            <div class="form-group">
+                {{ form.bio.label_tag }}
+                {{ form.bio }}
+                {{ form.bio.errors }}
+            </div>
+
+            <button type="submit" class="submit-button">Save Changes</button>
+        </form>
+
+        <a href="{% url 'profile-details' request.user.pk %}" class="btn cancel-button">Cancel</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.username }}'s Profile</title>
+    <link rel="stylesheet" href="{% static "css/profile-details.css" %}">
+</head>
+
+<body class="profile-page">
+
+    <div class="profile-banner" style="background-image: url('{{ object.profile.profile_banner }}');">
+            <img class="profile-picture" src="{{ object.profile.profile_picture }}">
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-username">{{ object.username }}</div>
+
+        {% if object.profile.bio %}
+            <div class="profile-bio">{{ object.profile.bio }}</div>
+        {% else %}
+            <div class="profile-bio placeholder-bio">
+                Add a profile description so people can know more about you.
+            </div>
+        {% endif %}
+    </div>
+
+    <section class="user-groups-section">
+        <h1 class="section-title">Joined Groups</h1>
+
+        {% if joined_groups %}
+            <ul class="group-list">
+                {% for group in joined_groups %}
+                    <li class="group-item">
+                        <a href="{% url 'group-details' group.pk %}" class="group-link">
+                            <div class="group-banner-preview" style="background-image: url('{{ group.banner_url }}');"></div>
+                            <div class="group-info">
+                                <h2>{{ group.name }}</h2>
+                                <p>{{ group.description|truncatechars:100 }}</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="no-groups">You haven't joined any groups yet.</div>
+        {% endif %}
+    </section>
+
+    <section class="edit-profile-section">
+        <h1 class="section-title">Edit Profile</h1>
+        <p class="section-description">
+            Update your profile information by adding a description, a profile picture and a profile banner to show people who you are.
+        </p>
+        <a href="{% url 'edit-profile' request.user.pk %}" class="edit-profile-button">Edit Profile</a>
+    </section>
+
+    <section class="logout-section">
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </section>
+
+</body>
+</html>
