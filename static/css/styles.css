@@ -1,5 +1,5 @@
-@import "delete-group.css";
+@import "hobbygroups/delete-group.css";
 @import "form.css";
-@import "home-page.css";
-@import "create-group-form.css";
-@import "profile-details.css";
+@import "common/home-page.css";
+@import "hobbygroups/create-group-form.css";
+@import "profile/profile-details.css";

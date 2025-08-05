@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Post</title>
+    <link rel="stylesheet" href="{% static 'css/hobbygroups/delete-group.css' %}">
+</head>
+
+<body>
+
+    <div class="delete-container">
+        <p class="delete-message">
+            Are you sure you want to delete the post <strong>{{ object.title }}</strong>?
+        </p>
+
+        <div class="delete-buttons">
+            <form method="post" style="margin: 0;">
+                {% csrf_token %}
+                <button type="submit" class="delete-button">Delete</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

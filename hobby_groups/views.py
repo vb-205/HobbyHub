@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import View
@@ -10,11 +11,12 @@ from hobby_groups.models import HobbyGroup, GroupMembership
 from posts.forms import CreatePostForm
 
 
-class CreateHobbyGroupView(CreateView):
+class CreateHobbyGroupView(LoginRequiredMixin, CreateView):
     model = HobbyGroup
     form_class = CreateHobbyGroupForm
-    template_name = 'create-group.html'
+    template_name = 'hobbygroups/create-group.html'
     success_url = reverse_lazy('home')
+    login_url = reverse_lazy('register')
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -30,7 +32,7 @@ class CreateHobbyGroupView(CreateView):
 
 class HobbyGroupDetailView(FormMixin, DetailView):
     model = HobbyGroup
-    template_name = 'group-details.html'
+    template_name = 'hobbygroups/group-details.html'
     context_object_name = 'group'
     form_class = CreatePostForm
 
@@ -47,6 +49,17 @@ class HobbyGroupDetailView(FormMixin, DetailView):
         self.object = self.get_object()
         form = self.get_form_class()(self.request.POST)
 
+        user = request.user
+
+        if not user.is_authenticated:
+            messages.error(request, "You must be logged in and a group member to post.")
+            return redirect(self.request.path_info)
+
+
+        if not GroupMembership.objects.filter(user=user, group=self.object).exists():
+            messages.error(request, "Only group members can make posts.")
+            return redirect(self.request.path_info)
+
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -57,7 +70,8 @@ class HobbyGroupDetailView(FormMixin, DetailView):
             context = self.get_context_data(form=form)
             return self.render_to_response(context)
 
-class JoinGroupView(View):
+class JoinGroupView(LoginRequiredMixin, View):
+    login_url = reverse_lazy('register')
 
     @staticmethod
     def post(request, pk):
@@ -69,7 +83,9 @@ class JoinGroupView(View):
         return redirect('group-details', pk=pk)
 
 class LeaveGroupView(View):
-    def post(self, request, pk):
+
+    @staticmethod
+    def post(request, pk):
         group = get_object_or_404(HobbyGroup, pk=pk)
         membership = GroupMembership.objects.get(user=request.user, group=group)
 
@@ -83,12 +99,12 @@ class LeaveGroupView(View):
 class EditHobbyGroupView(GroupAdminRequiredMixin, UpdateView):
     model = HobbyGroup
     form_class = EditHobbyGroupForm
-    template_name = 'edit-group.html'
+    template_name = 'hobbygroups/edit-group.html'
 
     def get_success_url(self):
         return reverse('group-details', kwargs={'pk': self.object.pk})
 
 class DeleteHobbyGroupView(GroupAdminRequiredMixin, DeleteView):
     model = HobbyGroup
-    template_name = 'delete-group.html'
+    template_name = 'hobbygroups/delete-group.html'
     success_url = reverse_lazy('home')

@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('home_page/', include('common.urls')),
     path('group/', include('hobby_groups.urls')),
+    path('post/', include('posts.urls')),
 ]

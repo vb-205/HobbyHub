@@ -3,11 +3,12 @@ from hobby_groups.models import GroupMembership, HobbyGroup
 
 
 class HomePageView(TemplateView):
-    template_name = 'home-page.html'
+    template_name = 'common/home-page.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
+
         if user.is_authenticated:
             user_group_ids = GroupMembership.objects.filter(user=user).values_list('group_id', flat=True)
             user_groups = HobbyGroup.objects.filter(id__in=user_group_ids)
@@ -19,4 +20,19 @@ class HomePageView(TemplateView):
         context['user_groups'] = user_groups
         context['popular_groups'] = popular_groups
 
+        return context
+
+class SearchResultsView(TemplateView):
+    template_name = 'common/search-results.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q', '')
+        if query:
+            results = HobbyGroup.objects.filter(name__icontains=query)
+        else:
+            results = HobbyGroup.objects.none()
+
+        context['query'] = query
+        context['results'] = results
         return context

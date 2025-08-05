@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ object.username }}'s Profile</title>
-    <link rel="stylesheet" href="{% static "css/profile-details.css" %}">
+    <link rel="stylesheet" href="{% static "css/profile/profile-details.css" %}">
 </head>
 
 <body class="profile-page">
@@ -30,9 +30,9 @@
         <h1 class="section-title">Joined Groups</h1>
 
         {% if joined_groups %}
-            <ul class="group-list">
+            <ul class="profile-group-list">
                 {% for group in joined_groups %}
-                    <li class="group-item">
+                    <li class="profile-group-item">
                         <a href="{% url 'group-details' group.pk %}" class="group-link">
                             <div class="group-banner-preview" style="background-image: url('{{ group.banner_url }}');"></div>
                             <div class="group-info">
@@ -45,6 +45,28 @@
             </ul>
         {% else %}
             <div class="no-groups">You haven't joined any groups yet.</div>
+        {% endif %}
+    </section>
+
+    <section class="user-posts-section">
+        <h1 class="section-title">Your Posts</h1>
+
+        {% if user_posts %}
+            <ul class="post-list">
+                {% for post in user_posts %}
+                    <li class="post-item">
+                        <a href="{% url 'group-details' post.group.pk %}" class="post-link">
+                            <div class="post-preview">
+                                <h2>{{ post.title }}</h2>
+                                <p>{{ post.description|truncatechars:100 }}</p>
+                                <span class="post-date">{{ post.created_at|date:"F j, Y" }}</span>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="no-posts">You haven't created any posts yet.</div>
         {% endif %}
     </section>
 

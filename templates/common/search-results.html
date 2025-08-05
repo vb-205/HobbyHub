@@ -1,0 +1,28 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+    <div class="group-container">
+        <h1>Search Results for "{{ query }}"</h1>
+
+
+        {% if results %}
+            <ul class="group-list">
+                {% for group in results %}
+                    <li class="group-item">
+                        <a href="{% url 'group-details' group.pk %}" class="group-link">
+                            <div class="group-banner-preview" style="background-image: url('{{ group.banner_url }}');"></div>
+                            <div class="group-info">
+                                <h2>{{ group.name }}</h2>
+                                <p>{{ group.description|truncatechars:100 }}</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No search results found.</p>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

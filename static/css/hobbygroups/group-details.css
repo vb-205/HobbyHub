@@ -70,7 +70,8 @@
     margin-top: 5px;
 }
 
-.join-button {
+.join-button,
+.leave-button {
     background-color: #4a90e2;
     color: white;
     border: none;
@@ -81,7 +82,8 @@
     transition: background-color 0.3s ease;
 }
 
-.join-button:hover {
+.join-button:hover,
+.leave-button:hover {
     background-color: #3b78c3;
 }
 
@@ -107,13 +109,26 @@
     margin-top: 40px;
 }
 
+.post-link-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .post-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
     background-color: #fff;
-    border-radius: 12px;
-    padding: 20px 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    margin-bottom: 24px;
-    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.post-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
 }
 
 .post-header {
@@ -150,6 +165,12 @@
 .post-timestamp {
     font-size: 13px;
     color: #999;
+}
+
+.comment-count {
+    margin-left: 15px;
+    font-size: 13px;
+    color: #666;
 }
 
 .no-posts-message {
@@ -210,7 +231,7 @@
     font-family: Arial, sans-serif;
 }
 
-button[type="submit"] {
+.submit-post {
     width: 100%;
     padding: 14px;
     background-color: #4a90e2;
@@ -222,7 +243,7 @@ button[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
+.submit-post:hover {
     background-color: #3b78c3;
 }
 

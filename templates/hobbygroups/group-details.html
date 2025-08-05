@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ group.name }}</title>
-    <link rel="stylesheet" href="{% static 'css/group-details.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hobbygroups/group-details.css' %}">
 </head>
 
 <body class="group-details-page">
@@ -70,16 +70,21 @@
         <div class="left-content">
             {% if posts %}
                 {% for post in posts %}
-                    <div class="post-box">
-                        <div class="post-header">
-                            <h2 class="post-title">{{ post.title }}</h2>
-                            <span class="post-author">posted by {{ post.author.username }}</span>
+                    <a href="{% url 'post-details' post.pk %}" class="post-link-wrapper">
+                        <div class="post-box">
+                            <div class="post-header">
+                                <h2 class="post-title">{{ post.title }}</h2>
+                                <span class="post-author">posted by {{ post.author.username }}</span>
+                            </div>
+                            <p class="post-description">{{ post.description }}</p>
+                            <div class="post-footer">
+                                <span class="post-timestamp">{{ post.created_at|date:"F j, Y, g:i a" }}</span>
+                                <span class="comment-count">
+                                    {{ post.comments.count }} comment{{ post.comments.count|pluralize }}
+                                </span>
+                            </div>
                         </div>
-                        <p class="post-description">{{ post.description }}</p>
-                        <div class="post-footer">
-                            <span class="post-timestamp">{{ post.created_at|date:"F j, Y, g:i a" }}</span>
-                        </div>
-                    </div>
+                    </a>
                 {% endfor %}
             {% else %}
                 <p class="no-posts-message">No posts yet. Be the first to post!</p>
@@ -101,7 +106,7 @@
                         {{ form.description }}
                         {{ form.description.errors }}
                     </div>
-                    <button type="submit">Post</button>
+                    <button type="submit" class="submit-post">Post</button>
                 </form>
             </div>
         </div>

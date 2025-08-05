@@ -27,7 +27,7 @@
 
 .profile-container {
     text-align: center;
-    margin-top: 100px; /* space for profile picture */
+    margin-top: 100px;
     padding: 20px;
 }
 
@@ -51,33 +51,42 @@
 .section-title {
     text-align: center;
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
-.group-list {
+.profile-group-list {
     list-style: none;
     padding: 0;
     display: grid;
-    gap: 24px;
-    grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
+    column-gap: 10px;
+    row-gap: 10px;
+    grid-template-columns: repeat(4, 350px);
     justify-items: center;
+    margin: 0 auto;
 }
 
-.group-item {
+.profile-group-item {
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
     background: white;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     transition: transform 0.2s;
+    width: 320px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.group-item:hover {
-    transform: translateY(-2px);
+.profile-group-item:hover {
+    transform: translateY(-5px);
 }
 
 .group-link {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     text-decoration: none;
     color: inherit;
 }
@@ -87,15 +96,35 @@
     background-size: cover;
     background-position: center;
     border-bottom: 1px solid #eee;
+    flex-shrink: 0;
 }
 
 .group-info {
     padding: 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
 }
 
 .group-info h2 {
+    font-size: 18px;
     margin: 0 0 8px;
-    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.group-info p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .group-info p {
@@ -105,6 +134,64 @@
 }
 
 .no-groups {
+    text-align: center;
+    font-size: 24px;
+    color: #777;
+    margin-top: 100px;
+}
+
+.user-posts-section {
+    margin-top: 60px;
+}
+
+.post-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+}
+
+.post-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    width: 100%;
+    max-width: 340px;
+}
+
+.post-item:hover {
+    transform: translateY(-2px);
+}
+
+.post-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 16px;
+}
+
+.post-preview h2 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.post-preview p {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: #555;
+}
+
+.post-date {
+    font-size: 12px;
+    color: #999;
+}
+
+.no-posts {
     text-align: center;
     font-size: 24px;
     color: #777;
